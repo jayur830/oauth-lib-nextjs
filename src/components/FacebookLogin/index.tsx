@@ -21,7 +21,9 @@ export default function FacebookLogin({ children, onSuccess }: PropsWithChildren
                      */
                     if (error.code === 'auth/account-exists-with-different-credential') {
                         if (auth.currentUser) {
+                            console.log('email:', auth.currentUser.email);
                             const { user } = await linkWithPopup(auth.currentUser, provider);
+                            console.log('user:', user);
                             onSuccess && onSuccess(await user.getIdToken(true));
                         } else {
                             alert('해당 이메일의 다른 계정이 이미 존재합니다. 이미 존재하는 계정으로 로그인 후 재로그인을 시도하세요.');
